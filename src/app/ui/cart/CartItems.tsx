@@ -8,28 +8,27 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 const CartItems = () => {
   const {cartData, setCartData} = useContext(StoreContext);
 
-  const removeItem = (event, id, title) => {
+  const removeItem = (event:any, id:any, title:any) => {
     event.preventDefault();
-  
-    // Create a new array excluding the item with the specified id
-    const updatedCart = cartData.filter((item) => item.id !== id);
-  
-    // Update the state with the new array
-    setCartData(updatedCart);
-  
+    const filteredItem = cartData.filter((item:any) => {
+      return item.id !== id;
+    });
+
+    setCartData([...filteredItem]);
+
     toast.success(`${title} has been removed from the Cart successfully!`, {
       autoClose: 1000,
       position: toast.POSITION.TOP_RIGHT
     });
-  };
-  
+
+  }
 
   return(
     <div className="w-full max-w-xs bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <h2 className="text-2xl pb-4">{cartData.length} Items in Cart</h2>
       <ul>
       {
-        cartData.map((item) => (
+        cartData.map((item:any) => (
           <li 
             key={item.id}
             className="p-2 m-2 rounded-md flex bg-gray-200">
@@ -40,7 +39,7 @@ const CartItems = () => {
             </div>
             <a 
               className="ml-3 mt-1 cursor-pointer"
-              onClick = {(event) => removeItem(event, item.id, item.title)}>
+              onClick = {(event) => console.log(event,item.id,item.name)}>
               <TrashIcon className="w-6"/>
             </a>
           </li>

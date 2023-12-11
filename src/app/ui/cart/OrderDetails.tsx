@@ -7,21 +7,21 @@ import Link from 'next/link';
 const OrderDetails = () => {
   const {cartData} = useContext(StoreContext);
 
-  const bookToBuy = cartData.filter((book) => {
+  const bookToBuy = cartData.filter((book:any) => {
     return book.type === "Buy"
   });
 
   const priceForBuy = bookToBuy.reduce(
-    (accumulator, book) => accumulator + book.sellPrice,
+    (accumulator:any, book:any) => accumulator + book.sellPrice,
     0,
   );
 
-  const bookToRent = cartData.filter((book) => {
+  const bookToRent = cartData.filter((book:any) => {
     return book.type === "Rent"
   });
 
   const priceForRent = bookToRent.reduce(
-    (accumulator, book) => accumulator + book.rentPrice,
+    (accumulator:any, book:any) => accumulator + book.rentPrice,
     0,
   );
 
@@ -45,7 +45,7 @@ const OrderDetails = () => {
           <div className="flex flex-col items-center p-2">
             <span className="text-red-500 font-bold text-xl">No Books are in Cart!</span><br/>
             <Link
-              href="/bookstore"
+              href="/store"
               className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >Go To Store</Link>
           </div>)

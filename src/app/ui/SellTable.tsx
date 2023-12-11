@@ -19,13 +19,13 @@ export default function SellTable() {
   const { data: session } = useSession();
 
   // Handle form input changes
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setBook((prevBook) => ({ ...prevBook, [name]: value }));
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     try {
       setIsSubmitting(true);

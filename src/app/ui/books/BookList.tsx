@@ -1,6 +1,23 @@
-import BookCard from "./BookCard";
+import React from 'react';
+import BookCard from './BookCard';
 
-const BookList = ({ books }) => {
+interface Book {
+  id: string; // assuming id is a string based on mongoose ObjectId
+  title: string;
+  author: string;
+  genre?: string;
+  description?: string;
+  price: number;
+  stock?: number;
+  imageUrl: string;
+  userEmail: string;
+}
+
+interface BookListProps {
+  books: Book[] | null | undefined;
+}
+
+const BookList: React.FC<BookListProps> = ({ books }) => {
   console.log('Books:', books);
 
   return (

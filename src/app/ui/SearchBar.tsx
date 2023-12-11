@@ -1,10 +1,13 @@
-// components/SearchBar.js
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
-const SearchBar = ({ onSearch }) => {
+interface SearchBarProps {
+  onSearch: (term: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
     setSearchTerm(term);
     onSearch(term);
