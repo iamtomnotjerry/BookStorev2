@@ -17,7 +17,7 @@ const SignUp = () => {
     const router = useRouter();
 
     // Function to handle form submission
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e:any) => {
         e.preventDefault();
         if (!name || !email || !password) {
             setError("All fields are necessary.");
@@ -29,8 +29,8 @@ const SignUp = () => {
         }
 
         try {
-            setIsSubmitting(true);
-            const resUserExists  = await fetch('api/userExist',{
+            setIsSubmitting(true);  
+            const resUserExists  = await fetch('/api/auth/check-exist',{
               method: "POST",
               headers: {
                 "Content-Type" :"application/json"
@@ -48,7 +48,7 @@ const SignUp = () => {
               return;
             }
 
-            const res = await fetch('api/signup', {
+            const res = await fetch('/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -57,7 +57,7 @@ const SignUp = () => {
                     name, email, password
                 })
             });
-
+            console.log(res)
             if (res.ok) {
                 const form = e.target;
                 form.reset();
@@ -68,7 +68,7 @@ const SignUp = () => {
                 setName("");
                 setEmail("");
                 setPassword("");
-                router.push('/signin')
+                router.push('/auth/signin')
             } else {
                 console.log('User registration failed.')
                 toast.error("Registration failed. Please try again.", {
@@ -156,7 +156,7 @@ const SignUp = () => {
                 {/* Sign In Link */}
                 <p className="mt-4 text-sm text-center">
                     Already have an account?{' '}
-                    <Link href="/signin" className="text-indigo-500 hover:underline">
+                    <Link href="/auth/signin" className="text-indigo-500 hover:underline">
                         Sign In
                     </Link>
                 </p>

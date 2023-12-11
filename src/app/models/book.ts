@@ -8,6 +8,8 @@ interface Book extends Document {
   description: string;
   price: number;
   stock: number;
+  imageUrl: string;
+  userEmail: string;
 }
 
 const bookSchema = new Schema<Book>({
@@ -21,20 +23,29 @@ const bookSchema = new Schema<Book>({
   },
   genre: {
     type: String,
-    required: true,
+    required: false,
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   price: {
     type: Number,
     required: true,
   },
-  stock: {
-    type: Number,
+  imageUrl: {
+    type: String,
     required: true,
   },
+  userEmail: {
+    type: String, 
+    required: true,
+  },
+  stock: {
+    type: Number,
+    required: false,
+  },
+  
 }, { timestamps: true });
 
 const BookModel = mongoose.models.Book as mongoose.Model<Book> || mongoose.model<Book>('Book', bookSchema);

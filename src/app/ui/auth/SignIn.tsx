@@ -44,7 +44,7 @@ const SignIn = () => {
         if (res.ok) {
           // Display a success toast notification
           toast.success('Sign-in successful!', { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
-          router.replace('/bookstore'); // Adjust the path as needed
+          router.replace('/store'); // Adjust the path as needed
         }
       }
     } catch (error) {
