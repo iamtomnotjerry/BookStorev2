@@ -110,6 +110,11 @@ const SignIn = () => {
             Sign Up
           </Link>
         </p>
+        <p className="mt-2 text-sm text-center">
+          <Link href="/auth/reset-password/request" className="text-indigo-500 hover:underline">
+            Forgot your password?
+          </Link>
+        </p>
       </form>
     </div>
   );

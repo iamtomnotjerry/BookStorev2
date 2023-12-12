@@ -15,7 +15,7 @@ export default function SideBar() {
       {/* Next.js Link component for navigation */}
       <Link
         className="mb-2 flex h-20 items-end justify-start rounded-md bg-purple-600 p-4 md:h-30"
-        href="/bookstore"
+        href="/store"
       >
         {/* Logo component */}
         <div>

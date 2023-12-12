@@ -1,20 +1,19 @@
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  // Configure your email provider's SMTP settings here
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
+    pass: process.env.EMAIL_PASSWORD // Replace with your actual email password
+  }
 });
 
 export const sendPasswordResetEmail = async (to: string, resetLink: string) => {
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: 'BookStore',
     to,
     subject: 'Password Reset Request',
-    html: `<p>Click the following link to reset your password: <a href="${resetLink}">${resetLink}</a></p>`,
+    html: `<p>Code to reset your password: ${resetLink}</p>`,
   };
 
   try {
