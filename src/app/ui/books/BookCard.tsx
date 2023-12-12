@@ -30,7 +30,7 @@ const BookCard = ({ book, userEmail }) => {
               <span className="text-sm"> {book.price}</span>
             </div>
           </div>
-          {isCurrentUserBook ? <AddToCart book={book} /> : <UpdateDeleteButton />}
+          {isCurrentUserBook ?<UpdateDeleteButton />  : <AddToCart book={book} />}
         </div>
       </div>
     </Link>

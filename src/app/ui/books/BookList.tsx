@@ -19,7 +19,6 @@ interface BookListProps {
 }
 
 const BookList: React.FC<BookListProps> = ({ books, userEmail }) => {
-  console.log('Books:', books);
 
   return (
     <div className="flex flex-wrap p-2 justify-center gap-2">

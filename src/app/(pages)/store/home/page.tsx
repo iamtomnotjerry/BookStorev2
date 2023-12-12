@@ -1,3 +1,4 @@
+// pages/store/index.js
 'use client';
 import React, { useEffect, useState } from 'react';
 import SearchBar from '@/app/ui/SearchBar';
@@ -78,7 +79,7 @@ export default function StorePage() {
     <div className="flex flex-col items-center">
       <h2 className="text-3xl">Welcome {session?.user?.name || 'Guest'}</h2>
       <SearchBar onSearch={handleSearch} />
-      <BookList books={filteredBooks}/>
+      <BookList books={filteredBooks} userEmail={userEmail}/>
     </div>
   );
 }

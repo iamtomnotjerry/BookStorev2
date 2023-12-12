@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import BookList from '../../ui/books/BookList';
 import SearchBar from '@/app/ui/SearchBar';
+import { useSession } from 'next-auth/react';
 
 interface Book {
   title: string;
@@ -40,11 +41,12 @@ export default function StorePage() {
     );
     setFilteredBooks(filtered);
   };
-
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email;
   return (
     <div className="flex flex-col items-center">
       <SearchBar onSearch={handleSearch} />
-      <BookList books={filteredBooks} />
+      <BookList books={filteredBooks} userEmail={userEmail} />
     </div>
   );
 }
