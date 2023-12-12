@@ -15,16 +15,17 @@ interface Book {
 
 interface BookListProps {
   books: Book[] | null | undefined;
+  userEmail: string;
 }
 
-const BookList: React.FC<BookListProps> = ({ books }) => {
+const BookList: React.FC<BookListProps> = ({ books, userEmail }) => {
   console.log('Books:', books);
 
   return (
     <div className="flex flex-wrap p-2 justify-center gap-2">
       {Array.isArray(books) ? (
         books.map((book) => (
-          <BookCard key={book.id} book={book} />
+          <BookCard key={book.id} book={book} userEmail={userEmail} />
         ))
       ) : (
         <p>No books available</p>

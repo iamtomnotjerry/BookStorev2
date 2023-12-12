@@ -1,15 +1,17 @@
-import Image from "next/image";
 import Link from "next/link";
 import { CurrencyRupeeIcon } from "@heroicons/react/24/solid";
 import AddToCart from "./AddtoCart";
+import UpdateDeleteButton from "./UpdateDeleteButton";
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book, userEmail }) => {
+  const isCurrentUserBook = book.userEmail === userEmail;
   return (
+    
     <Link href={`/bookstore/${book.id}`}>
       <div className="flex flex-col items-center rounded-xl bg-gray-50 p-2 shadow-sm">
         <div className="mb-2 h-13 flex justify-center">
           <img
-            className="rounded-md"
+            className="rounded-md" 
             src={book.imageUrl}
             alt={book.title}
             width={150}
@@ -28,7 +30,7 @@ const BookCard = ({ book }) => {
               <span className="text-sm"> {book.price}</span>
             </div>
           </div>
-          <AddToCart book={book}/>
+          {isCurrentUserBook ? <AddToCart book={book} /> : <UpdateDeleteButton />}
         </div>
       </div>
     </Link>
