@@ -1,18 +1,20 @@
-'use client'
-// components/DeleteAccount.js
 import { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { toast } from 'react-toastify';
 
-const DeleteAccount = ({ onClose }) => {
+interface DeleteAccountProps {
+  onClose: () => void; // Update the prop type
+}
+
+const DeleteAccount: React.FC<DeleteAccountProps> = ({ onClose }) => {
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null); // Specify the type explicitly
 
   const { data: session } = useSession();
   const userEmail = session?.user?.email;
 
-  const handleDeleteAccount = async (e:any) => {
+  const handleDeleteAccount = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Check if the user entered the confirmation correctly
