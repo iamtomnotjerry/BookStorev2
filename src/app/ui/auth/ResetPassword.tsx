@@ -15,7 +15,7 @@ const ResetPassword = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     try {
