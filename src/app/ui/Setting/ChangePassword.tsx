@@ -10,7 +10,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ onClose }) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null); // Specify the type explicitly
   const { data: session } = useSession();
   const userEmail = session?.user?.email;
 
