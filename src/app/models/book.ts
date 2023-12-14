@@ -4,12 +4,9 @@ import mongoose, { Schema, Document } from 'mongoose';
 interface Book extends Document {
   title: string;
   author: string;
-  genre: string;
-  description: string;
-  price: number;
-  stock: number;
   imageUrl: string;
   userEmail: string;
+  pdfFile: Buffer;
 }
 
 const bookSchema = new Schema<Book>({
@@ -21,18 +18,6 @@ const bookSchema = new Schema<Book>({
     type: String,
     required: true,
   },
-  genre: {
-    type: String,
-    required: false,
-  },
-  description: {
-    type: String,
-    required: false,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
   imageUrl: {
     type: String,
     required: true,
@@ -41,10 +26,12 @@ const bookSchema = new Schema<Book>({
     type: String, 
     required: true,
   },
-  stock: {
-    type: Number,
-    required: false,
+  pdfFile: {
+    type: Buffer,  // Use Buffer for binary data
+    required: true,
   },
+  
+  
   
 }, { timestamps: true });
 

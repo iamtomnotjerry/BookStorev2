@@ -51,7 +51,7 @@ export default function StorePage() {
   const { data: session } = useSession();
   const userEmail = session?.user?.email;
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center p-2">
       <SearchBar onSearch={handleSearch} />
       <BookList books={filteredBooks}/>
     </div>

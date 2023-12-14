@@ -4,45 +4,55 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react'; // Import useSession hook
 
-// Define the SellTable component
-export default function SellTable() {
+// Define the UploadBook component
+export default function UploadBook() {
   // State to manage form data and submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [book, setBook] = useState({
     title: '',
     author: '',
     imageUrl: '',
-    price: '',
+    pdfFile: null, // New field for the PDF file
   });
 
   // Use the useSession hook to get the session data
   const { data: session } = useSession();
 
   // Handle form input changes
-  const handleChange = (e:any) => {
-    const { name, value } = e.target;
-    setBook((prevBook) => ({ ...prevBook, [name]: value }));
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+
+    // Check if the input is a file input
+    if (type === 'file') {
+      // Update the state with the selected file
+      setBook((prevBook) => ({ ...prevBook, [name]: e.target.files[0] }));
+    } else {
+      // Update other form fields
+      setBook((prevBook) => ({ ...prevBook, [name]: value }));
+    }
   };
 
   // Handle form submission
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setIsSubmitting(true);
 
-      // Include the userId in the book data
-      const sellData = {
-        ...book,
-        userEmail: session?.user?.email,
-      };
+      // Create a FormData object to handle file uploads
+      const formData = new FormData();
+      formData.append('title', book.title);
+      formData.append('author', book.author);
+      formData.append('imageUrl', book.imageUrl);
+      formData.append('pdfFile', book.pdfFile);
+      console.log('1')
+
+      // Include the userEmail in the book data
+      formData.append('userEmail', session?.user?.email);
 
       // Send a POST request to the backend API (adjust the URL accordingly)
       const res = await fetch('/api/sell', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(sellData),
+        body: formData,
       });
 
       // Check if the submission was successful
@@ -50,7 +60,6 @@ export default function SellTable() {
         // Handle successful submission
         console.log('Book sold successfully!');
         toast.success('Book sold successfully!');
-        
         // You can add more logic here for a successful response
       } else {
         // Handle error response
@@ -71,7 +80,7 @@ export default function SellTable() {
   // Render the component
   return (
     <div className="max-w-md p-4 bg-white rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Sell Your Book</h2>
+      <h2 className="text-2xl font-semibold mb-4">Upload Book</h2>
       <form onSubmit={handleSubmit}>
         {/* Title input */}
         <div className="mb-4">
@@ -121,18 +130,18 @@ export default function SellTable() {
           />
         </div>
 
-        {/* Price input */}
+        {/* PDF file input */}
         <div className="mb-4">
-          <label htmlFor="price" className="block text-sm font-medium text-gray-600">
-            Price
+          <label htmlFor="pdfFile" className="block text-sm font-medium text-gray-600">
+            PDF File
           </label>
           <input
-            type="number"
-            id="price"
-            name="price"
-            value={book.price}
+            type="file"
+            id="pdfFile"
+            name="pdfFile"
             onChange={handleChange}
             className="mt-1 p-2 w-full md:w-96 border rounded-md focus:outline-none focus:border-blue-500"
+            accept=".pdf" // Specify accepted file types (PDF in this case)
             required
           />
         </div>

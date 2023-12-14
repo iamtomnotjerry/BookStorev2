@@ -1,35 +1,33 @@
-import Link from "next/link";
-import { CurrencyRupeeIcon } from "@heroicons/react/24/solid";
-import AddToCart from "./AddtoCart";
-import UpdateDeleteButton from "./UpdateDeleteButton";
+import Link from 'next/link';
 
 // Assuming Book is an interface with the necessary properties
 interface Book {
   id: string;
   title: string;
   imageUrl: string;
+  author: string;
   // Add other properties as needed
 }
 
 const BookCard: React.FC<{ book: Book }> = ({ book }) => {
   return (
     <Link href={`/store/${book.id}`}>
-      <div className="flex flex-col items-center rounded-xl bg-gray-50 p-2 shadow-sm">
-        <div className="mb-2 h-13 flex justify-center">
+      <div className="flex flex-col items-center rounded-xl overflow-hidden bg-white shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out">
+        <div className="h-48 overflow-hidden">
           <img
-            className="rounded-md" 
+            className="w-full h-full object-cover"
             src={book.imageUrl}
             alt={book.title}
-            width={150}
-            height={100}
-            style={{ height: '200px', width: 'auto'}}
-
           />
         </div>
-        <div>
-          <h3 className="ml-2 text-sm font-medium">{book.title}</h3>
+        <div className="p-4 w-full">
+          <h3
+            className="text-xl font-bold mb-2 overflow-hidden overflow-ellipsis max-h-14 whitespace-normal text-gray-900 font-serif"
+          >
+            {book.title}
+          </h3>
+          <p className="text-gray-600">{book.author}</p>
         </div>
-        {/* Additional code */}
       </div>
     </Link>
   );

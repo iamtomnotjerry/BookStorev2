@@ -1,4 +1,4 @@
-import SellTable from '@/app/ui/SellTable'
+import SellTable from '@/app/ui/UploadBook'
 import React from 'react'
 export default function page() {
 

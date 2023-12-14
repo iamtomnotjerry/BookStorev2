@@ -14,13 +14,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="flex items-center space-x-2 mb-4">
+    <div className="flex items-center space-x-2 mb-4 w-full">
       <input
         type="text"
         value={searchTerm}
         onChange={handleChange}
         placeholder="Search books..."
-        className="border p-2 rounded-md"
+        className="border p-2 rounded-md w-full"
       />
     </div>
   );

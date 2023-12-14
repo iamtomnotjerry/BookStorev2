@@ -4,8 +4,15 @@ import './globals.css'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {AuthProvider} from './Providers'
+// Add this import statement to your CSS or global styles file
 
-const inter = Inter({ subsets: ['latin'] })
+import { Roboto } from 'next/font/google'
+ 
+const roboto = Roboto({
+  weight: '300',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <AuthProvider>
         {children}
         </AuthProvider>
