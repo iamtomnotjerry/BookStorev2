@@ -7,8 +7,15 @@ import SearchBar from '@/app/ui/SearchBar';
 import { useSession } from 'next-auth/react';
 
 interface Book {
+  id: string; // assuming id is a string based on mongoose ObjectId
   title: string;
-  // Add other properties as needed
+  author: string;
+  genre?: string;
+  description?: string;
+  price: number;
+  stock?: number;
+  imageUrl: string;
+
 }
 
 export default function StorePage() {
@@ -46,7 +53,7 @@ export default function StorePage() {
   return (
     <div className="flex flex-col items-center">
       <SearchBar onSearch={handleSearch} />
-      <BookList books={filteredBooks} userEmail={userEmail} />
+      <BookList books={filteredBooks}/>
     </div>
   );
 }
