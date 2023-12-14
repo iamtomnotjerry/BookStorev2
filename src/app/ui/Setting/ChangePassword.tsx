@@ -1,18 +1,20 @@
-'use client'
-// components/ChangePassword.js
 import { useState } from 'react';
-import { useSession } from 'next-auth/react'; // Import useSession hook
+import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 
-const ChangePassword = ({ onClose }) => {
+interface ChangePasswordProps {
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const ChangePassword: React.FC<ChangePasswordProps> = ({ onClose }) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
   const { data: session } = useSession();
-  const userEmail = session?.user?.email
+  const userEmail = session?.user?.email;
 
-  const handleChangePassword = async (e) => {
+  const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Check if new password and confirm password match
@@ -31,7 +33,7 @@ const ChangePassword = ({ onClose }) => {
         body: JSON.stringify({
           currentPassword,
           newPassword,
-          userEmail
+          userEmail,
         }),
       });
 
@@ -44,7 +46,7 @@ const ChangePassword = ({ onClose }) => {
           autoClose: 1000,
           position: toast.POSITION.TOP_RIGHT,
         });
-        onClose(); // Close the modal
+        onClose(e as any); // Close the modal
       } else {
         // Password change failed
         setError(data.error || 'An error occurred during password change');
@@ -105,5 +107,3 @@ const ChangePassword = ({ onClose }) => {
 };
 
 export default ChangePassword;
-
-
