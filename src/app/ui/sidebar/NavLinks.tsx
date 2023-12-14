@@ -22,12 +22,12 @@ import {
     { name: 'Home', href: '/store/home', icon: HomeIcon },
     { name: 'Store', href: '/store', icon: BookOpenIcon },
     { name: 'Sell', href: '/store/sell', icon: RectangleStackIcon },
-    { name: 'Cart', href: '/store/cart', icon: ShoppingCartIcon },
-    { name: 'Track Order', href: '/store/track-order', icon: TruckIcon },
-    { name: 'Community', href: '/store/community', icon: UserGroupIcon },
+    // { name: 'Cart', href: '/store/cart', icon: ShoppingCartIcon },
+    // { name: 'Track Order', href: '/store/track-order', icon: TruckIcon },
+    // { name: 'Community', href: '/store/community', icon: UserGroupIcon },
     { name: 'Settings', href: '/store/settings', icon: CogIcon },
-    { name: 'About', href: '/store/about', icon: Squares2X2Icon },
-    { name: 'Admin', href: '/store/admin', icon: CubeTransparentIcon },
+    // { name: 'About', href: '/store/about', icon: Squares2X2Icon },
+    // { name: 'Admin', href: '/store/admin', icon: CubeTransparentIcon },
   ];
   
   // Functional component for rendering navigation links
