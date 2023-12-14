@@ -27,7 +27,7 @@ export default function StorePage() {
     // Fetch books and set them to both books and filteredBooks initially
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/books');
+        const response = await fetch('/api/books');
         const { books } = await response.json();
         setBooks(books);
         setFilteredBooks(books);
