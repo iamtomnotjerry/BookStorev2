@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 
 interface Book {
   title: string;
+  userEmail: string;
   // Add other properties as needed
 }
 
