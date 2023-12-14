@@ -23,7 +23,7 @@ const BookCard: React.FC<{ book: Book }> = ({ book }) => {
             width={150}
             height={100}
             style={{ height: '200px', width: 'auto'}}
-            priority={true}
+
           />
         </div>
         <div>
