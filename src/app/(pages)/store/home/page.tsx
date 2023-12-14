@@ -8,7 +8,10 @@ import { useSession } from 'next-auth/react';
 interface Book {
   title: string;
   userEmail: string;
-  // Add other properties as needed
+  id: string; // Add the missing properties
+  author: string;
+  price: number;
+  imageUrl: string;
 }
 
 // ... (previous imports)
