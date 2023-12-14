@@ -32,7 +32,7 @@ export default function StorePage() {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${session?.accessToken}`,
+              Authorization: `Bearer ${session?.user}`,
             },
           });
 
