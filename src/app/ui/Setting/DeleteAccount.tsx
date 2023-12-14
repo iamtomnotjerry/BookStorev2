@@ -12,7 +12,7 @@ const DeleteAccount = ({ onClose }) => {
   const { data: session } = useSession();
   const userEmail = session?.user?.email;
 
-  const handleDeleteAccount = async (e) => {
+  const handleDeleteAccount = async (e:any) => {
     e.preventDefault();
 
     // Check if the user entered the confirmation correctly
@@ -74,7 +74,7 @@ const DeleteAccount = ({ onClose }) => {
 
         {/* Confirmation input */}
         <label className="block mb-2">
-          Type 'DELETE' to confirm:
+        Type &apos;DELETE&apos; to confirm:
           <input
             type="text"
             value={confirmation}

@@ -13,7 +13,7 @@ const UpdateDeleteButton = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const handleCart = (e) => {
+  const handleCart = (e:any) => {
   e.preventDefault();
   
 }
@@ -38,11 +38,7 @@ const UpdateDeleteButton = () => {
             <button className="absolute top-2 right-2 text-gray-500" onClick={closeModal}>
               <XCircleIcon  className="w-6 h-6" />
             </button>
-            {title === 'Change Password' ? (
-              <UpdateButton onClose={closeModal} />
-            ) : title === 'Delete Account' ? (
-              <DeleteButton onClose={closeModal} />
-            ) : null}
+            
           </div>
         </div>
       )}
