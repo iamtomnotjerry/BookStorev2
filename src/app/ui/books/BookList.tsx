@@ -18,11 +18,10 @@ interface BookListProps {
   userEmail: string;
 }
 
-const BookList: React.FC<BookListProps> = ({ books, userEmail }) => {
-
+const BookList: React.FC<BookListProps> = ({ books, userEmail = '' }) => {
   return (
     <div className="flex flex-wrap p-2 justify-center gap-2">
-      {Array.isArray(books) ? (
+      {Array.isArray(books) && books.length > 0 ? (
         books.map((book) => (
           <BookCard key={book.id} book={book} userEmail={userEmail} />
         ))

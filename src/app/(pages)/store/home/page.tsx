@@ -13,7 +13,10 @@ interface Book {
   price: number;
   imageUrl: string;
 }
-
+interface BookListProps {
+  books: Book[];
+  userEmail: string;
+}
 // ... (previous imports)
 
 export default function StorePage() {
