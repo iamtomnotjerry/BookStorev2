@@ -7,7 +7,6 @@ import { useSession } from 'next-auth/react';
 
 interface Book {
   title: string;
-  userEmail: string;
   id: string; // Add the missing properties
   author: string;
   price: number;
@@ -86,7 +85,7 @@ export default function StorePage() {
     <div className="flex flex-col items-center">
       <h2 className="text-3xl">Welcome {session?.user?.name || 'Guest'}</h2>
       <SearchBar onSearch={handleSearch} />
-      <BookList books={filteredBooks} userEmail={userEmail}/>
+      <BookList books={filteredBooks}/>
     </div>
   );
 }

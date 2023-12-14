@@ -3,8 +3,8 @@ import { CurrencyRupeeIcon } from "@heroicons/react/24/solid";
 import AddToCart from "./AddtoCart";
 import UpdateDeleteButton from "./UpdateDeleteButton";
 
-const BookCard = ({ book, userEmail }) => {
-  const isCurrentUserBook = book.userEmail === userEmail;
+const BookCard = ({ book}) => {
+
   return (
     
     <Link href={`/store/${book.id}`}>
