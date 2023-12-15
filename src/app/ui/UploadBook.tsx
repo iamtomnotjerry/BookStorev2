@@ -4,15 +4,15 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react'; // Import useSession hook
 
-// Define the UploadBook component
-export default function UploadBook() {
+// Define the SellTable component
+export default function SellTable() {
   // State to manage form data and submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [book, setBook] = useState({
     title: '',
     author: '',
     imageUrl: '',
-    pdfFile: null, // New field for the PDF file
+    pdfFile: null,
   });
 
   // Use the useSession hook to get the session data
@@ -35,18 +35,16 @@ export default function UploadBook() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       setIsSubmitting(true);
 
-      // Create a FormData object to handle file uploads
+      // Create FormData for file upload
       const formData = new FormData();
       formData.append('title', book.title);
       formData.append('author', book.author);
       formData.append('imageUrl', book.imageUrl);
       formData.append('pdfFile', book.pdfFile);
-      console.log('1')
-
-      // Include the userEmail in the book data
       formData.append('userEmail', session?.user?.email);
 
       // Send a POST request to the backend API (adjust the URL accordingly)
@@ -80,7 +78,7 @@ export default function UploadBook() {
   // Render the component
   return (
     <div className="max-w-md p-4 bg-white rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Upload Book</h2>
+      <h2 className="text-2xl font-semibold mb-4">Sell Your Book</h2>
       <form onSubmit={handleSubmit}>
         {/* Title input */}
         <div className="mb-4">
