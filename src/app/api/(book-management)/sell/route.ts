@@ -9,14 +9,23 @@ export async function POST(req: any) {
     const formData = await req.formData();
 
     // Extract values from form data
-    const title = formData.get('title');
-    const author = formData.get('author');
-    const imageUrl = formData.get('imageUrl');
-    const userEmail = formData.get('userEmail');
-    const pdfFile = formData.get('pdfFile');
+    const title: string = formData.get('title');
+    const author: string = formData.get('author');
+    const imageUrl: string = formData.get('imageUrl');
+    const userEmail: string = formData.get('userEmail');
 
-    // Convert the pdfFile to a Buffer
-    const pdfBuffer = Buffer.from(pdfFile instanceof Buffer ? pdfFile : String(pdfFile));
+    // Assuming pdfFile is a File
+    const pdfFile: File | null = formData.get('pdfFile');
+
+    if (!pdfFile) {
+      return NextResponse.json({ message: 'PDF file not provided' }, { status: 400 });
+    }
+
+    // Read the content of the File as ArrayBuffer
+    const pdfContent: ArrayBuffer = await pdfFile.arrayBuffer();
+
+    // Convert the ArrayBuffer to a Buffer
+    const pdfBuffer = Buffer.from(pdfContent);
 
     console.log(pdfBuffer);
     console.log({ title, author, imageUrl, userEmail, pdfFile });

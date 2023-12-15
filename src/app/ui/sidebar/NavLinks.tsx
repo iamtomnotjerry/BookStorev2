@@ -13,7 +13,7 @@ import {
 
 const links = [
   { name: 'Home', href: '/store/home', icon: HomeIcon },
-  { name: 'Store', href: '/store', icon: BookOpenIcon },
+  { name: 'Books', href: '/store', icon: BookOpenIcon },
   { name: 'Admin', href: '/store/admin', icon: CubeTransparentIcon },
   { name: 'Settings', href: '/store/settings', icon: CogIcon },
 ];

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 // Assuming Book is an interface with the necessary properties
 interface Book {
-  id: string;
+  _id: string;
   title: string;
   imageUrl: string;
   author: string;
@@ -11,7 +11,8 @@ interface Book {
 
 const BookCard: React.FC<{ book: Book }> = ({ book }) => {
   return (
-    <Link href={`/store/${book.id}`}>
+    
+    <Link href={`/store/${book._id}`}>
       <div className="flex flex-col items-center rounded-xl overflow-hidden bg-white shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out">
         <div className="h-48 overflow-hidden">
           <img
@@ -27,6 +28,7 @@ const BookCard: React.FC<{ book: Book }> = ({ book }) => {
             {book.title}
           </h3>
           <p className="text-gray-600">{book.author}</p>
+
         </div>
       </div>
     </Link>

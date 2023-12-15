@@ -78,7 +78,7 @@ export default function SellTable() {
   // Render the component
   return (
     <div className="max-w-md p-4 bg-white rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Sell Your Book</h2>
+      <h2 className="text-2xl font-semibold mb-4">Upload Your Book</h2>
       <form onSubmit={handleSubmit}>
         {/* Title input */}
         <div className="mb-4">
@@ -150,7 +150,7 @@ export default function SellTable() {
           className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 w-full"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Submitting...' : 'Sell'}
+          {isSubmitting ? 'Submitting...' : 'Upload'}
         </button>
       </form>
     </div>
