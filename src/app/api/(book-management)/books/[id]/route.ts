@@ -10,7 +10,6 @@ export async function GET(req: any) {
     const id = pathname.split('/').pop();
     await connectMongoDB();
     const book = await Book.findById(id);
-
     if (!book) {
       return NextResponse.json({ error: 'Book not found' }, { status: 404 });
     }

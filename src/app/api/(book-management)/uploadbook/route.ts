@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { connectMongoDB } from '@/app/lib/mongodb-connection-module';
-import User from "@/app/models/user";
 import Book from "@/app/models/book";
 
 export async function POST(req: any) {
@@ -13,22 +12,8 @@ export async function POST(req: any) {
     const author: string = formData.get('author');
     const imageUrl: string = formData.get('imageUrl');
     const userEmail: string = formData.get('userEmail');
+    const pdfId = formData.get('pdfId'); // Retrieve the PDF identifier from the form data
 
-    // Assuming pdfFile is a File
-    const pdfFile: File | null = formData.get('pdfFile');
-
-    if (!pdfFile) {
-      return NextResponse.json({ message: 'PDF file not provided' }, { status: 400 });
-    }
-
-    // Read the content of the File as ArrayBuffer
-    const pdfContent: ArrayBuffer = await pdfFile.arrayBuffer();
-
-    // Convert the ArrayBuffer to a Buffer
-    const pdfBuffer = Buffer.from(pdfContent);
-
-    console.log(pdfBuffer);
-    console.log({ title, author, imageUrl, userEmail, pdfFile });
 
     await connectMongoDB();
 
@@ -38,14 +23,8 @@ export async function POST(req: any) {
       author,
       imageUrl,
       userEmail,
-      pdfFile: pdfBuffer,
+      pdfId,
     });
-
-    console.log(book);
-
-    // Update the user's books array
-    await User.findOneAndUpdate({ email: userEmail }, { $push: { books: book._id } });
-
     return NextResponse.json({ message: 'Sell successfully' }, { status: 201 });
   } catch (error) {
     console.error('Error during selling:', error);

@@ -3,23 +3,33 @@
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const BookPage = () => {
+const PDFViewerPage = () => {
   const id = useParams().id;
   const [book, setBook] = useState(null);
-
+  const [pdfContent, setPdfContent] = useState(null);
   useEffect(() => {
     // Define an async function to fetch book data
     const fetchBook = async () => {
       try {
-        const response = await fetch(`/api/books/${id}`);
-        if (!response.ok) {
+        const bookresponse = await fetch(`/api/books/${id}`);
+        if (!bookresponse.ok) {
           throw new Error('Failed to fetch book data');
         }
-        const { book } = await response.json();
+        const { book } = await bookresponse.json();
         setBook(book);
+
+        const pdfresponse = await fetch(`/api/pdf/${book.pdfId}`)
+        if (!pdfresponse.ok){
+          throw new Error('Failed to fetch book data');
+        }
+        const {pdfContent} = await pdfresponse.json()
+        setPdfContent(pdfContent)
+        
+        
       } catch (error) {
         console.error('Error fetching book data:', error);
       }
+      
     };
 
     // Call the async function inside the useEffect
@@ -28,29 +38,20 @@ const BookPage = () => {
     }
   }, [id]);
 
-  if (!book) {
+  if (!book || !pdfContent) {
     return <p>Loading...</p>;
   }
-
-  // Assuming book.pdfFile is a binary buffer
-
-  const blob = new Blob([book.pdfFile], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
-
+  console.log(pdfContent.data)
+  
 
   return (
     <div>
       <h1>{book.title}</h1>
       <p>Author: {book.author}</p>
-      <p>Genre: {book.genre}</p>
-      <p>Description: {book.description}</p>
-      <p>Price: ${book.price}</p>
-      <p>Stock: {book.stock}</p>
-
-
-      <embed id="pdfViewer" type="application/pdf" width="100%" height="600" src={url} />
+      <h1>pdfId: {book.pdfId}</h1>
+      {/* <embed id="pdfViewer" type="application/pdf" width="100%" height="600" src={pdfViewerUrl} /> */}
     </div>
   );
 };
 
-export default BookPage;
+export default PDFViewerPage;

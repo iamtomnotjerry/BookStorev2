@@ -1,4 +1,3 @@
-// models/book.ts
 import mongoose, { Schema, Document } from 'mongoose';
 
 interface Book extends Document {
@@ -6,34 +5,30 @@ interface Book extends Document {
   author: string;
   imageUrl: string;
   userEmail: string;
-  pdfFile: Buffer;
+  pdfId: mongoose.Types.ObjectId;
 }
 
-const bookSchema = new Schema<Book>({
-  title: {
-    type: String,
-    required: true,
+const bookSchema = new Schema<Book>(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    imageUrl: {
+      type: String,
+      required: true,
+    },
+    pdfId: {
+      type: Schema.Types.ObjectId, // Explicitly specify the type
+      required: true,
+    },
   },
-  author: {
-    type: String,
-    required: true,
-  },
-  imageUrl: {
-    type: String,
-    required: true,
-  },
-  userEmail: {
-    type: String, 
-    required: true,
-  },
-  pdfFile: {
-    type: Buffer,  // Use Buffer for binary data
-    required: true,
-  },
-  
-  
-  
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 const BookModel = mongoose.models.Book as mongoose.Model<Book> || mongoose.model<Book>('Book', bookSchema);
 

@@ -40,39 +40,48 @@ export default function SellTable() {
       setIsSubmitting(true);
 
       // Create FormData for file upload
-      const formData = new FormData();
-      formData.append('title', book.title);
-      formData.append('author', book.author);
-      formData.append('imageUrl', book.imageUrl);
-      formData.append('pdfFile', book.pdfFile);
-      formData.append('userEmail', session?.user?.email);
-
+      const pdfFormData = new FormData();
+      pdfFormData.append('pdfFile', book.pdfFile);
       // Send a POST request to the backend API (adjust the URL accordingly)
-      const res = await fetch('/api/sell', {
+      const pdfResponse = await fetch('/api/uploadpdf', {
         method: 'POST',
-        body: formData,
+        body: pdfFormData,
       });
+      if (pdfResponse.ok) {
+        // Retrieve the PDF data from the response
+        const pdfData = await pdfResponse.json();
 
-      // Check if the submission was successful
-      if (res.ok) {
-        // Handle successful submission
-        console.log('Book sold successfully!');
-        toast.success('Book sold successfully!');
-        // You can add more logic here for a successful response
-      } else {
-        // Handle error response
-        console.error('Failed to sell the book');
-        toast.error('Failed to sell the book');
-        // You can add more logic here for error handling
+        // Now, send a POST request to upload the book details
+        const bookFormData = new FormData();
+        bookFormData.append('title', book.title);
+        bookFormData.append('author', book.author);
+        bookFormData.append('imageUrl', book.imageUrl);
+        bookFormData.append('pdfId', pdfData._id); // Use the identifier from the PDF upload
+
+        // Send a POST request to upload the book details
+        const bookResponse = await fetch('/api/uploadbook', {
+          method: 'POST',
+          body: bookFormData,
+        });
+        if (bookResponse.ok) {
+          console.log('Book and PDF uploaded successfully!');
+          toast.success('Book and PDF uploaded successfully!');
+        } else {
+          console.error('Failed to upload the book');
+          toast.error('Failed to upload the book');
+        }
+        
+      }else {
+        console.error('Failed to upload the PDF');
+        toast.error('Failed to upload the PDF');
       }
     } catch (error) {
-      // Handle other errors if needed
       console.error('An error occurred:', error);
-      toast.error('An error occurred while selling the book');
+      toast.error('An errorr occurred while uploading the book');
     } finally {
-      // Reset submission status
       setIsSubmitting(false);
     }
+    
   };
 
   // Render the component
