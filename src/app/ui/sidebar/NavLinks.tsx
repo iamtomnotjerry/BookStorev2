@@ -5,14 +5,14 @@ import Link from "next/link";
 import { usePathname } from 'next/navigation';
 
 import { 
-  HomeIcon, 
+
   BookOpenIcon, 
   CogIcon, 
   CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
 
 const links = [
-  { name: 'Home', href: '/store/home', icon: HomeIcon },
+
   { name: 'Books', href: '/store', icon: BookOpenIcon },
   { name: 'Admin', href: '/store/admin', icon: CubeTransparentIcon },
   { name: 'Settings', href: '/store/settings', icon: CogIcon },
