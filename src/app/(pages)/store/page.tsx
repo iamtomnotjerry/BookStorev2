@@ -7,7 +7,7 @@ import SearchBar from '@/app/ui/SearchBar';
 import { useSession } from 'next-auth/react';
 
 interface Book {
-  id: string; // assuming id is a string based on mongoose ObjectId
+  _id: string; // assuming id is a string based on mongoose ObjectId
   title: string;
   author: string;
   genre?: string;
