@@ -1,11 +1,12 @@
 'use client'
-// components/ResetPassword.tsx
+// Import necessary modules and components
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { BookOpenIcon } from "@heroicons/react/24/solid";
 import { useSession } from 'next-auth/react';
 
+// ResetPassword component definition
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [resetCode, setResetCode] = useState('');
@@ -15,6 +16,7 @@ const ResetPassword = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
+  // Function to handle form submission
   const handleSubmit = async (e:any) => {
     e.preventDefault();
 
@@ -30,7 +32,7 @@ const ResetPassword = () => {
         });
 
         if (response.ok) {
-          setIsCodeSent(true);
+          setIsCodeSent(true); // Set isCodeSent to true when the code is sent
           toast.success('Password reset link sent successfully!', { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         } else {
           const data = await response.json();
@@ -64,6 +66,7 @@ const ResetPassword = () => {
     }
   };
 
+  // JSX structure for the component
   return (
     <div className="flex items-center justify-center bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full md:w-96">
@@ -138,6 +141,7 @@ const ResetPassword = () => {
         <button
           className="bg-indigo-500 text-white p-2 rounded-md w-full hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo"
           type="submit"
+          
         >
           {isCodeSent ? 'Reset Password' : 'Send Reset Code'}
         </button>
@@ -156,4 +160,5 @@ const ResetPassword = () => {
   );
 };
 
+// Export the ResetPassword component
 export default ResetPassword;

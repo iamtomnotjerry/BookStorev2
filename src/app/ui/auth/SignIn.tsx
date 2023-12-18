@@ -1,25 +1,27 @@
 'use client'
-// Import the necessary toast styles
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { signIn, SignInResponse } from 'next-auth/react';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BookOpenIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
-import { signIn, SignInResponse } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false); // Add loading state
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when submitting
 
     // Check if email and password are provided
     if (!email || !password) {
       // Display a toast notification for missing fields
       toast.error('All fields are necessary.', { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
+      setLoading(false); // Reset loading state on error
       return;
     }
 
@@ -33,24 +35,24 @@ const SignIn = () => {
       if (!res) {
         // Handle the case where signIn returns undefined
         toast.error('An unexpected error occurred.', { position: toast.POSITION.TOP_CENTER });
+        setLoading(false); // Reset loading state on error
         return;
       }
 
       if (res.error) {
         // Display a toast notification for invalid credentials
         toast.error('Invalid Credentials', { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
+        setLoading(false); // Reset loading state on error
       } else {
-        // Check if the sign-in was successful before navigating
         if (res.ok) {
-          // Display a success toast notification
           toast.success('Sign-in successful!', { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
-          router.replace('/store'); // Adjust the path as needed
+          router.replace('/store');
         }
       }
     } catch (error) {
       console.error(error);
-      // Display a toast notification for unexpected errors
       toast.error('An unexpected error occurred.', { position: toast.POSITION.TOP_CENTER });
+      setLoading(false); // Reset loading state on error
     }
   };
 
@@ -95,12 +97,13 @@ const SignIn = () => {
           />
         </div>
 
-        {/* Sign In Button */}
+        {/* Sign In Button with conditional rendering based on loading state */}
         <button
           className="bg-indigo-500 text-white p-2 rounded-md w-full hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo"
           type="submit"
+          disabled={loading} // Disable the button when loading is true
         >
-          Sign In
+          {loading ? 'Signing In...' : 'Sign In'}
         </button>
 
         {/* Sign Up Link */}
