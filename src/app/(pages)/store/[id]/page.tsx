@@ -2,30 +2,32 @@
 // Import necessary libraries and Tailwind CSS styles
 // Import necessary libraries and Tailwind CSS styles
 // Import necessary libraries and Tailwind CSS styles
-import { useParams } from 'next/navigation';
+import { useParams } from 'next/navigation'; // Changed from 'next/navigation' to 'next/router'
 import { useEffect, useState } from 'react';
-import { Worker, Viewer } from '@react-pdf-viewer/core';
-
+interface PdfContent {
+  data: ArrayBuffer;
+  // Other properties if present
+}
 const PDFViewerPage = () => {
-  const id = useParams().id;
+  const { id } = useParams(); // Destructure id directly from useParams()
   const [book, setBook] = useState(null);
-  const [pdfContent, setPdfContent] = useState(null);
+  const [pdfContent, setPdfContent] = useState<PdfContent | null>(null);
 
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const bookresponse = await fetch(`/api/books/${id}`);
-        if (!bookresponse.ok) {
+        const bookResponse = await fetch(`/api/books/${id}`);
+        if (!bookResponse.ok) {
           throw new Error('Failed to fetch book data');
         }
-        const { book } = await bookresponse.json();
+        const { book } = await bookResponse.json();
         setBook(book);
 
-        const pdfresponse = await fetch(`/api/pdf/${book.pdfId}`);
-        if (!pdfresponse.ok) {
+        const pdfResponse = await fetch(`/api/pdf/${book.pdfId}`);
+        if (!pdfResponse.ok) {
           throw new Error('Failed to fetch PDF content');
         }
-        const { pdfContent } = await pdfresponse.json();
+        const { pdfContent } = await pdfResponse.json();
         setPdfContent(pdfContent);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -50,9 +52,13 @@ const PDFViewerPage = () => {
 
   return (
     <div>
-      <iframe className="w-full h-screen" id="pdfViewer" type="application/pdf" src={dataUrl} />
+      <iframe
+        className="w-full h-screen"
+        id="pdfViewer"
+        title="PDF Viewer"
+        src={dataUrl}
+      ></iframe>
     </div>
-    
   );
 };
 
