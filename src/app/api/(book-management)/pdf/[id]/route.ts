@@ -7,7 +7,7 @@ const uri = 'mongodb+srv://23560004:23560004@cluster0.nleb44z.mongodb.net/?retry
 const dbName = 'bookstore';
 const collectionName = 'pdf';
 
-async function fetchPDFContent(pdfId) {
+async function fetchPDFContent(pdfId:any) {
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   
     try {
