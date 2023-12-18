@@ -8,7 +8,7 @@ export default function ButtonSignOut() {
   }
   return (
       <button
-        className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-purple-600 md:flex-none md:justify-start md:px-3"
+        className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-pink-400 md:flex-none md:justify-start md:px-3"
         onClick={handleLogout}
       >
         {/* Heroicon for an arrow left on a rectangle */}

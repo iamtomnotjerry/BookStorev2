@@ -93,9 +93,9 @@ const SignUp = () => {
             <form className="bg-white p-8 rounded shadow-md w-full md:w-96" onSubmit={handleSubmit}>
                 <div className="flex">
                     <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
-                    <div className="flex pb-5 mb-5 text-2xl text-purple-800">
+                    <div className="flex pb-5 mb-5 text-2xl text-pink-400">
                         <BookOpenIcon className="w-8 h-8" />
-                        <p>BookStore</p>
+                        <p>Free4Read</p>
                     </div>
                 </div>
 

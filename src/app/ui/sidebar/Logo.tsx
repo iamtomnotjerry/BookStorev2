@@ -12,7 +12,7 @@ const Logo = () => {
       <BookOpenIcon className="w-12 h-12" />
 
       {/* Paragraph element with a font size of 28 pixels, left margin of 1 unit. */}
-      <p className="text-[28px] ml-1">Bookshelf</p>
+      <p className="text-[28px] ml-1">Free4Read</p>
     </div>
   );
 };
