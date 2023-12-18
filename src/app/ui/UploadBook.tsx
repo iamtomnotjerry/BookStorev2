@@ -19,7 +19,7 @@ export default function SellTable() {
   const { data: session } = useSession();
 
   // Handle form input changes
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value, type } = e.target;
 
     // Check if the input is a file input
@@ -33,7 +33,7 @@ export default function SellTable() {
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     try {
