@@ -1,11 +1,10 @@
 'use client'
-// Import necessary dependencies
+
+
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-// Define the SellTable component
-export default function SellTable() {
-  // State to manage form data and submission status
+export default function UploadBook({ onClose }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [book, setBook] = useState({
     title: '',
@@ -82,9 +81,8 @@ export default function SellTable() {
     
   };
 
-  // Render the component
   return (
-    <div className="max-w-md p-4 bg-white rounded-md shadow-md">
+    <div >
       <h2 className="text-2xl font-semibold mb-4">Upload Your Book</h2>
       <form onSubmit={handleSubmit}>
         {/* Title input */}
@@ -161,5 +159,5 @@ export default function SellTable() {
         </button>
       </form>
     </div>
-  );
+  )
 }

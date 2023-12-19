@@ -3,6 +3,8 @@ import SellTable from '@/app/ui/UploadBook'
 import { redirect } from 'next/navigation';
 import React from 'react'
 import { useSession } from 'next-auth/react';
+import SettingsOption from '@/app/ui/Setting/SettingOption';
+import AdminOption from '@/app/ui/admin/AdminOption';
 
 export default function AdminPage() {
   const { data: session } = useSession();
@@ -13,9 +15,12 @@ export default function AdminPage() {
     redirect("/store");
   }
   return (
-    
-    <div>
-      <SellTable />
+    <div className="p-2 max-w-md mx-auto">
+      <h2 className="text-3xl font-semibold mb-4">Power of admin</h2>
+
+      <AdminOption title="Upload Book"  />
+
+      <AdminOption title="Update&Delete Books"/>
     </div>
   )
 }
