@@ -1,7 +1,4 @@
 'use client'
-// Import necessary libraries and Tailwind CSS styles
-// Import necessary libraries and Tailwind CSS styles
-// Import necessary libraries and Tailwind CSS styles
 import { useParams } from 'next/navigation'; // Changed from 'next/navigation' to 'next/router'
 import { useEffect, useState } from 'react';
 interface PdfContent {

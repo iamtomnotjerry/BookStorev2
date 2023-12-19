@@ -3,29 +3,40 @@ import { useContext } from "react";
 import { StoreContext } from "@/app/context";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 import { 
-
+  CubeTransparentIcon,
   BookOpenIcon, 
   CogIcon, 
 } from "@heroicons/react/24/outline";
 
 const links = [
-
+  
   { name: 'Books', href: '/store', icon: BookOpenIcon },
   { name: 'Settings', href: '/store/settings', icon: CogIcon },
+  { name: 'Admin', href: '/store/admin', icon: CubeTransparentIcon },
 ];
 
 const NavLinks = () => {
   const { cartData } = useContext(StoreContext);
-  const pathname =usePathname();
+  const pathname = usePathname();
 
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email;
+
+  const isAdmin = userEmail === '23560004@gm.uit.edu.vn';
 
   return (
     <>
       {links.map((link) => {
         const IconComponent = link.icon;
         const isActive = pathname === link.href;
+
+        // Check if the link is "Admin" and the user is not an admin, then skip rendering
+        if (link.name === 'Admin' && !isAdmin) {
+          return null;
+        }
 
         return (
           <Link
@@ -47,5 +58,8 @@ const NavLinks = () => {
     </>
   );
 };
+
+
+
 
 export default NavLinks;
