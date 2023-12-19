@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 import { useSession } from 'next-auth/react';
 
-export default function page() {
+export default function AdminPage() {
   const { data: session } = useSession();
   const userEmail = session?.user?.email;
 
