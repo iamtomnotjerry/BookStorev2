@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css'; // Import the annotation layer styles
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface PdfViewerProps {
@@ -17,7 +18,6 @@ const PdfViewer: React.FC<PdfViewerProps> = ({ pdfUrl }) => {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -47,7 +47,6 @@ const PdfViewer: React.FC<PdfViewerProps> = ({ pdfUrl }) => {
               pageNumber={pageIndex}
               renderMode="canvas"
               renderTextLayer={false}
-              renderAnnotationLayer={false}
               width={width * 0.8}
               onRenderSuccess={() => handlePageVisible(pageIndex + 1)}
             />
