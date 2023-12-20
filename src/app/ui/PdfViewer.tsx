@@ -58,4 +58,4 @@ const PdfViewer: React.FC<PdfViewerProps> = ({ pdfUrl }) => {
   );
 };
 
-export default PdfViewer;
+export default React.memo(PdfViewer);

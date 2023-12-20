@@ -1,6 +1,8 @@
 'use client'
 import PdfViewer from '@/app/ui/PdfViewer';
 import { useParams } from 'next/navigation'; // Changed from 'next/navigation' to 'next/router'
+import React from 'react';
+
 import { useEffect, useState } from 'react';
 interface PdfContent {
   data: ArrayBuffer;
@@ -55,4 +57,4 @@ const PDFViewerPage = () => {
   );
 };
 
-export default PDFViewerPage;
+export default React.memo(PDFViewerPage);
