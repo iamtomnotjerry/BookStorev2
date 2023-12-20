@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-
-// Set workerSrc once in your application
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface PdfViewerProps {
@@ -10,43 +8,48 @@ interface PdfViewerProps {
 
 const PdfViewer: React.FC<PdfViewerProps> = ({ pdfUrl }) => {
   const [numPages, setNumPages] = useState<number | null>(null);
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth);
+  const [visiblePages, setVisiblePages] = useState<number[]>([]);
 
-  const updateWindowWidth = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', updateWindowWidth);
-    return () => {
-      window.removeEventListener('resize', updateWindowWidth);
-    };
+  const handleResize = useCallback(() => {
+    setWidth(window.innerWidth);
   }, []);
 
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
+
+  const onDocumentLoadSuccess = useCallback(({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
-  };
+    setVisiblePages([1]); // Initially, only render the first page
+  }, []);
+
+  const handlePageVisible = useCallback((pageIndex: number) => {
+    setVisiblePages((prevVisiblePages) => {
+      if (!prevVisiblePages.includes(pageIndex)) {
+        return [...prevVisiblePages, pageIndex];
+      }
+      return prevVisiblePages;
+    });
+  }, []);
 
   return (
     <div style={{ width: '100%', height: '100vh', overflowX: 'hidden' }}>
       <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
-        {Array.from(new Array(numPages || 0), (el, index) => (
-          <div
-            key={`page_${index + 1}`}
-            style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+        {visiblePages.map((pageIndex) => (
+          <div key={`page_${pageIndex}`} style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Page
-              pageNumber={index + 1}
+              key={pageIndex}
+              pageNumber={pageIndex}
               renderMode="canvas"
               renderTextLayer={false}
               renderAnnotationLayer={false}
-              width={windowWidth * 0.8}
+              width={width * 0.8}
+              onRenderSuccess={() => handlePageVisible(pageIndex + 1)}
             />
           </div>
         ))}
