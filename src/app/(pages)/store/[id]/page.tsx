@@ -49,7 +49,9 @@ const PDFViewerPage = () => {
   const dataUrl = URL.createObjectURL(blob);
 
   return (
+    <div>
     <PdfViewer pdfUrl={dataUrl} />
+    </div>
   );
 };
 
