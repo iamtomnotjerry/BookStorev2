@@ -1,4 +1,5 @@
 'use client'
+import PdfViewer from '@/app/ui/PdfViewer';
 import { useParams } from 'next/navigation'; // Changed from 'next/navigation' to 'next/router'
 import { useEffect, useState } from 'react';
 interface PdfContent {
@@ -48,14 +49,7 @@ const PDFViewerPage = () => {
   const dataUrl = URL.createObjectURL(blob);
 
   return (
-    <div>
-      <iframe
-        className="w-full h-screen"
-        id="pdfViewer"
-        title="PDF Viewer"
-        src={dataUrl}
-      ></iframe>
-    </div>
+    <PdfViewer pdfUrl={dataUrl} />
   );
 };
 
