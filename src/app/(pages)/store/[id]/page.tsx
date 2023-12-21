@@ -52,7 +52,7 @@ const PDFViewerPage = () => {
 
   return (
     <div>
-    <PdfViewer pdfUrl={dataUrl} />
+      <PdfViewer pdfUrl={dataUrl} />
     </div>
   );
 };
