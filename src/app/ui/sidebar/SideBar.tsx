@@ -16,6 +16,7 @@ export default function SideBar() {
       <Link
         className="mb-2 flex h-20 items-end justify-start rounded-md bg-pink-300 p-4 md:h-30"
         href="/store"
+        prefetch={false}
       >
         {/* Logo component */}
         <div>
