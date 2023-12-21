@@ -13,7 +13,7 @@ const roboto = Roboto({
 })
 
 export const metadata: Metadata = {
-  title: 'Free4Read',
+  title: 'Free2Read',
   description: 'A Free online reading website',
 }
 

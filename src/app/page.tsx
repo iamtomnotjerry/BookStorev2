@@ -24,7 +24,7 @@ export default function Home() {
         {/* Title and icon */}
         <div className='flex pb-5 mb-5 text-5xl text-pink-400'>
           <BookOpenIcon className='w-12 h-12'/>  {/* BookOpenIcon from Heroicons */}
-          <p>Free4Read</p>
+          <p>Free2Read</p>
         </div>
 
         {/* Link to the "/bookstore" page */}
