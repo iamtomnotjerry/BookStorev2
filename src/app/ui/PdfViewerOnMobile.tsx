@@ -30,7 +30,8 @@ const PdfViewerOnMobile: React.FC<PdfViewerProps> = ({ pdfUrl }) => {
             <Page
               key={`page_${index + 1}`}
               pageNumber={index + 1}
-              width={300} // Adjust the width of the page as needed
+              renderMode="canvas"
+              renderTextLayer={false} // Adjust the width of the page as needed
             />
           </div>
         ))}
