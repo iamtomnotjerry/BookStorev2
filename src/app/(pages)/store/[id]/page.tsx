@@ -1,5 +1,6 @@
 'use client'
-import PdfViewer from '@/app/ui/PdfViewer';
+import PdfViewerOnComputer from '@/app/ui/PdfViewerOnComputer';
+import PdfViewerOnMobile from '@/app/ui/PdfViewerOnMobile';
 import { useParams } from 'next/navigation'; // Changed from 'next/navigation' to 'next/router'
 import React from 'react';
 
@@ -49,11 +50,12 @@ const PDFViewerPage = () => {
   const uint8Array = new Uint8Array(pdfContent.data);
   const blob = new Blob([uint8Array], { type: 'application/pdf' });
   const dataUrl = URL.createObjectURL(blob);
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-  return (
-    <div>
-      <PdfViewer pdfUrl={dataUrl} />
-    </div>
+  return isMobile ? (
+    <PdfViewerOnMobile pdfUrl={dataUrl} />
+  ) : (
+    <PdfViewerOnComputer pdfUrl={dataUrl} />
   );
 };
 
